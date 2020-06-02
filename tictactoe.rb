@@ -76,6 +76,27 @@ end
 #drawBoard(board1) #Working as intended
 #drawBoard(board2) #Working as intended
 
+def checkWinCondition(input,board)
+  #Win Condition 1: horizontal row
+
+  if [board[0],board[1],board[2]] == [input,input,input] || [board[3],board[4],board[5]] == [input,input,input] || [board[6],board[7],board[8]] == [input,input,input]
+    return true
+  end
+
+  #Win Condition 2: vertical row
+  
+  if [board[0],board[3],board[6]] == [input,input,input] || [board[2],board[5],board[8]] == [input,input,input] || [board[3],board[6],board[9]] == [input,input,input]
+    return true
+  end
+
+  #Win Condition 3: Diag row
+
+  if [board[0],board[4],board[8]] == [input,input,input] || [board[2],board[4],board[6]] == [input,input,input]
+    return true
+  end
+
+end
+
 #Run the playerMode function to select mode.
 mode = playerMode()
 
@@ -100,6 +121,19 @@ if (mode==2)
     end
     
     ##TODO: Check for win condition
+    if checkWinCondition('x',board)
+      isCompleted = true
+      drawBoard(board)
+      puts "Player 1 wins!"
+      break
+    end
+
+    if checkWinCondition('o',board)
+      isCompleted = true
+      drawBoard(board)
+      puts "Player 2 wins!"
+      break
+    end
 
     turnnumber += 1
     if turnnumber.odd?
